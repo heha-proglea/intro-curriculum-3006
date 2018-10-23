@@ -10,4 +10,14 @@ module.exports = (robot) => {
 		msg.send('Hello, ' + username);
 		// msgオブジェクトのsendメソッドを用いて「発言」する
 	});
+  
+      robot.hear(/lot>/i, (msg) => {
+    // 正規表現で、大文字小文字問わずlot>という文字にマッチした場合→次の無名関数を実行する
+        const username = msg.message.user.name;
+        // msgオブジェクトから(slackの?)ユーザ名を取得する(※ちなみにVMのshell上で実行するとユーザ名はShellとなる)
+        const lots = ['大吉', '吉', '中吉', '末吉', '凶'];
+        const lot = lots[Math.floor(Math.random() * lots.length)];
+        // lotsの要素をランダムに取得して、lotとする
+        msg.send(lot + ', ' + username);
+        // msgオブジェクトのsendメソッドを用いて「発言」する 
 };
